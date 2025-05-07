@@ -10,7 +10,8 @@ const useScreenSize = () => {
     isTablet: window.innerWidth >= 640 && window.innerWidth < 1024,
     isDesktop: window.innerWidth >= 1024 && window.innerWidth<=1200,
     ismediumDesktop: window.innerWidth > 1200 && window.innerWidth < 1400,
-    isLargeDesktop: window.innerWidth >= 1400,
+    isLargeDesktop: window.innerWidth >= 1400 && window.innerWidth < 1500,
+    isLargerDesktop: window.innerWidth >= 1500,
     width: window.innerWidth
   });
 
@@ -22,7 +23,8 @@ const useScreenSize = () => {
         isTablet: window.innerWidth >= 640 && window.innerWidth < 1024,
         isDesktop: window.innerWidth >= 1024 && window.innerWidth <= 1200,
         ismediumDesktop: window.innerWidth >= 1200 && window.innerWidth <= 1400,
-        isLargeDesktop: window.innerWidth >= 1400,
+        isLargeDesktop: window.innerWidth >= 1400 && window.innerWidth < 1500,
+        isLargerDesktop: window.innerWidth >= 1500,
         width: window.innerWidth
       });
     };
@@ -134,13 +136,14 @@ const Navbar = () => {
     if (screenSize.isDesktop) return 'h-12 w-[100px]';
     if (screenSize.ismediumDesktop) return 'h-12 w-[120px]';
     if (screenSize.isLargeDesktop) return 'h-12 w-[200px]';
-    
+    if (screenSize.isLargerDesktop) return 'h-12 w-[250px]';
     return 'h-16 w-[100px]'; // Default for desktop
   };
 
   // Function to determine text size for nav items
   const getNavTextSize = () => {
     if (screenSize.isLargeDesktop) return 'text-lg';
+    if (screenSize.isLargerDesktop) return 'text-xl';
     if (screenSize.isDesktop) return 'text-xs';
     if (screenSize.ismediumDesktop) return 'text-lg';
     return 'text-xs';
@@ -148,6 +151,7 @@ const Navbar = () => {
   
   const getNavGap = () => {
     if (screenSize.isLargeDesktop) return 'gap-6';
+    if (screenSize.isLargerDesktop) return 'gap-6';
     if (screenSize.isDesktop) return 'gap-2';
     if (screenSize.ismediumDesktop) return 'gap-3';
     if (screenSize.isTablet) return 'gap-3';
@@ -158,7 +162,7 @@ const Navbar = () => {
     if (screenSize.isLargeDesktop) return 'text-lg';
     if (screenSize.isDesktop) return 'text-xl';
     
-    return 'text-sm';
+    return 'text-xl';
   };
 
   // Function to determine spacing between nav items
@@ -247,7 +251,7 @@ const Navbar = () => {
 
           {/* Mobile Navigation Links */}
           {menuOpen && (
-            <div className="lg:hidden fixed top-14 md:top-16 left-0 right-0 bg-white shadow-lg z-40">
+            <div className="lg:hidden fixed top-12 left-0 right-0 bg-white shadow-lg z-40">
               <ul className="flex flex-col space-y-2 p-4">
                 <li><a href="#home" className="flex items-center text-black hover:text-red-600 hover:bg-gray-100 px-3 py-2 rounded transition-all"> <FaHome className="mr-2" /> Home</a></li>
                 <li><a href="#price" className="flex items-center text-black hover:text-red-600 hover:bg-gray-100 px-3 py-2 rounded transition-all"><FaDollarSign className="mr-2" /> Price</a></li>
