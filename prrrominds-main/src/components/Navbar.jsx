@@ -40,22 +40,89 @@ const useScreenSize = () => {
 };
 
 const Sidebar = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError('');
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '4e9faa02-cb51-4253-98e6-b5794f4ece3a', // Replace with your actual access key
+          name: formData.name,
+          phone: formData.phone,
+          consent: formData.consent ? 'Yes' : 'No',
+          subject: 'New Enquiry from Website',
+          from_name: 'Website Sidebar Form',
+          redirect: false
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setSubmitSuccess(true);
+        setFormData({
+          name: '',
+          phone: '',
+          consent: false
+        });
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      } else {
+        throw new Error(result.message || 'Failed to submit form');
+      }
+    } catch (error) {
+      setSubmitError(error.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCallBackRequest = () => {
+    window.location.href = 'tel:+919606970803';
+  };
+
   return (
     <aside className="hidden lg:block w-72 bg-white shadow-xl border-l border-gray-200 fixed right-0 top-0 h-screen overflow-y-auto z-50">
       <div className="p-4">
         {/* Organize Site Visit Header */}
-        <div className="flex justify-between items-center mb-4">
-          <span className="bg-red-600 text-white px-3 py-1 text-lg rounded">Organize Site Visit</span>
+        <div className="flex justify-between bg-red-600 divide-x items-center mb-4">
+          <span className="bg-red-600 text-white px-3 py-1 text-xs rounded">Organize Site Visit</span>
           <a 
             href="tel:+919606970803" 
-            className="bg-red-600 text-white px-3 py-1 text-lg rounded font-semibold hover:bg-red-700 transition"
+            className="bg-red-600 text-white px-3 py-1 text-xs rounded font-semibold hover:bg-red-700 transition"
           >
             +91 9606970803
           </a>
         </div>
 
         {/* Request Call Back Button */}
-        <button className="w-full bg-red-600 text-white py-2 font-semibold rounded mb-4 hover:bg-red-700 transition shadow-md">
+        <button 
+          onClick={handleCallBackRequest}
+          className="w-full bg-red-600 text-white py-2 font-semibold rounded mb-4 hover:bg-red-700 transition shadow-md"
+        >
           Request Call Back
         </button>
 
@@ -73,30 +140,63 @@ const Sidebar = () => {
             </a>
           </div>
           
-          <form className="space-y-3">
+          {submitSuccess && (
+            <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
+              Thank you! Your enquiry has been submitted successfully.
+            </div>
+          )}
+          
+          {submitError && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+              {submitError}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-3">
             <input 
               type="text" 
+              name="name"
               placeholder="Name" 
+              value={formData.name}
+              onChange={handleChange}
+              required
               className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500" 
             />
             <div className="flex border border-gray-300 rounded overflow-hidden focus-within:ring-2 focus-within:ring-red-500">
               <span className="bg-gray-100 px-3 py-2 flex items-center">+91</span>
               <input 
                 type="tel" 
+                name="phone"
                 placeholder="Mobile Number" 
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                pattern="[0-9]{10}"
                 className="w-full px-2 py-2 focus:outline-none" 
               />
             </div>
-            <p className="text-xs text-gray-600">
-              I Consent to The Processing of Provided Data According To{' '}
-              <a href="#" className="text-blue-600 underline hover:text-blue-800">Privacy Policy</a>,{' '}
-              <a href="#" className="text-blue-600 underline hover:text-blue-800">Terms & Conditions</a>.
-            </p>
+            <div className="flex items-start">
+              <input 
+                type="checkbox" 
+                id="consent"
+                name="consent"
+                checked={formData.consent}
+                onChange={handleChange}
+                required
+                className="mt-1 mr-2"
+              />
+              <label htmlFor="consent" className="text-xs text-gray-600">
+                I Consent to The Processing of Provided Data According To{' '}
+                <a href="#" className="text-blue-600 underline hover:text-blue-800">Privacy Policy</a>,{' '}
+                <a href="#" className="text-blue-600 underline hover:text-blue-800">Terms & Conditions</a>.
+              </label>
+            </div>
             <button 
               type="submit" 
-              className="w-full bg-red-600 text-white py-2 font-semibold rounded hover:bg-red-700 transition shadow-md"
+              disabled={isSubmitting}
+              className="w-full bg-red-600 text-white py-2 font-semibold rounded hover:bg-red-700 transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Submit
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
           </form>
         </div>
