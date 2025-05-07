@@ -89,7 +89,7 @@ export default function PropertyInfo() {
       )}
 
       {/* Main Container - Added flex and min-h-screen for vertical centering */}
-      <div className="flex items-center justify-center min-h-screen lg:min-h-0 pt-10"> 
+      <div className="flex items-center justify-center min-h-screen shadow-lg lg:min-h-0 pt-10"> 
         {/* Card - Added responsive height */}
         <div className="relative w-75 lg:h-[32rem] h-auto mt-20"> 
           <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 z-10">
@@ -126,11 +126,22 @@ export default function PropertyInfo() {
                 </p>
 
                 <button
-                  className="bg-red-500 text-white text-sm px-4 py-1.5 rounded-lg"
-                  onClick={() => setShowEnquiry(true)}
-                >
-                  Enquire Now
-                </button>
+  className="relative bg-red-500 text-white text-sm px-4 py-1.5 rounded-lg 
+             border border-transparent
+             transition-all duration-300 ease-in-out
+             hover:scale-105 hover:shadow-lg
+             active:scale-95 active:bg-red-600
+             focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-opacity-50
+             overflow-visible"
+  onClick={() => setShowEnquiry(true)}
+>
+  {/* Persistent animated blur border using after pseudo-element */}
+  <span className="absolute inset-0 rounded-lg border-2 border-black 
+                  animate-[pulse_1.5s_cubic-bezier(0.4,0,0.6,1)_infinite] 
+                  pointer-events-none" />
+  
+  Enquire Now
+</button>
                 <p className="text-[12px] text-gray-900 mt-1">RERA : P52100019275</p>
               </div>
             </div>
