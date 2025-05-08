@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo.svg';
 import { FaHome, FaDollarSign, FaMap, FaSwimmingPool, FaImages, FaMapMarkerAlt, FaFileAlt, FaBars, FaTimes } from 'react-icons/fa';
-
+import { FaPhoneAlt, FaCar, FaRupeeSign } from 'react-icons/fa';
 // Custom hook to detect screen size
 const useScreenSize = () => {
   // Initial state based on window size
@@ -260,7 +260,7 @@ const Sidebar = () => {
           name: formData.name,
           phone: formData.phone,
           consent: formData.consent ? 'Yes' : 'No',
-          subject: 'New Enquiry from Website',
+          subject: 'New call Back Request from Website',
           from_name: 'Website Sidebar Form',
           redirect: false
         }),
@@ -370,7 +370,7 @@ const Sidebar = () => {
 
               {/* Form */}
               <form onSubmit={handleModalSubmit} className="w-full">
-                <h2 className="text-lg font-bold text-red-600 mb-2 text-center">ENQUIRY NOW</h2>
+                <h2 className="text-lg font-bold text-red-600 mb-2 text-center">REQUEST CALL BACK</h2>
                 
                 {submitStatus === 'success' ? (
                   <div className="text-center py-4">
