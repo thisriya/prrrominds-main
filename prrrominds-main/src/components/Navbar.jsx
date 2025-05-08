@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../assets/logo.svg';
 import { FaHome, FaDollarSign, FaMap, FaSwimmingPool, FaImages, FaMapMarkerAlt, FaFileAlt, FaBars, FaTimes } from 'react-icons/fa';
-import { FaPhoneAlt, FaCar, FaRupeeSign } from 'react-icons/fa';
+import { FaPhoneAlt, FaCar, FaRupeeSign,FaEnvelope, FaWhatsapp } from 'react-icons/fa';
+
 // Custom hook to detect screen size
 const useScreenSize = () => {
   // Initial state based on window size
@@ -621,6 +622,39 @@ const Sidebar = () => {
           </div>
         </div>
       </aside>
+
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-50">
+        <div className="flex justify-around items-center p-2  bg-red-600">
+          {/* Call Button */}
+          <a 
+            href="tel:+919606970803" 
+            className="flex flex-row gap-2 items-center justify-center p-2 text-white  transition-colors"
+          >
+            <FaPhoneAlt className="text-xl mb-1" />
+            <span className="text-xs font-medium">Call</span>
+          </a>
+
+          {/* Enquire Button */}
+          <button 
+            onClick={() => setShowEnquiry(true)}
+            className="flex flex-row gap-2 items-center justify-center p-2 text-white transition-colors"
+          >
+            <FaEnvelope className="text-xl mb-1" />
+            <span className="text-xs font-medium">Enquire</span>
+          </button>
+
+          {/* WhatsApp Button */}
+          <a 
+            href="https://wa.me/919606970803" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex flex-row gap-2 items-center justify-center p-2 text-white transition-colors"
+          >
+            <FaWhatsapp className="text-xl mb-1" />
+            <span className="text-xs font-medium">WhatsApp</span>
+          </a>
+        </div>
+      </div>
     </>
   );
 };

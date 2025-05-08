@@ -647,7 +647,7 @@ export default function PropertyInfo() {
   <button 
     type="submit"
     disabled={isSubmitting}
-    className={`relative max-w-[130px] border border-black bg-red-600 hover:bg-red-700 text-white text-lg font-semibold px-4 py-1.5 rounded-lg w-full
+    className={`relative max-w-[10px] border border-black bg-red-600 hover:bg-red-700 text-white text-lg font-semibold px-4 py-1.5 rounded-lg w-full
               transition-all duration-300 shadow-md
               disabled:opacity-50 disabled:cursor-not-allowed
               ${!isSubmitting ? 'animate-popBounce' : ''}`}

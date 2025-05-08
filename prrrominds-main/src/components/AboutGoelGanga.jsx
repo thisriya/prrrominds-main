@@ -4,6 +4,7 @@ import { FaPhoneAlt, FaCar, FaRupeeSign } from 'react-icons/fa';
 
 const AboutGoelGanga = () => {
       const [showEnquiry, setShowEnquiry] = useState(false);
+      const [showhomeEnquiry, setShowhomeEnquiry] = useState(false);
       const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -19,6 +20,15 @@ const AboutGoelGanga = () => {
           setSubmitStatus(null);
         }
       }, [showEnquiry]);
+
+      useEffect(() => {
+        document.body.style.overflow = showhomeEnquiry ? 'hidden' : 'auto';
+        // Reset form state when modal is closed
+        if (!showhomeEnquiry) {
+          setSubmitStatus(null);
+        }
+      }, [showhomeEnquiry]);
+      
     
       const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -61,6 +71,7 @@ const AboutGoelGanga = () => {
             // Auto-close after 3 seconds
             setTimeout(() => {
               setShowEnquiry(false);
+              setShowhomeEnquiry(false)
             }, 3000);
           } else {
             setSubmitStatus('error');
@@ -263,10 +274,213 @@ const AboutGoelGanga = () => {
                     </div>
                   </div>
                 </div>
-              )}
+    )}
+
+{showhomeEnquiry && (
+                <div className="fixed left-0 top-0 w-screen h-screen z-30 flex items-center justify-center bg-black bg-opacity-50">
+                  <div className="bg-white rounded-xl w-full max-w-sm mx-2 p-5 relative">
+                    <button
+                      className="absolute top-2 right-3 text-gray-600 text-xl"
+                      onClick={() => setShowhomeEnquiry(false)}
+                    >
+                      ×
+                    </button>
+        
+                    <div className="flex flex-col items-center gap-4">
+                      {/* Header */}
+                      <div className="bg-red-600 text-white text-sm py-1 px-3 rounded font-semibold">
+                        WE PROMISE
+                      </div>
+        
+                      {/* Promise Info */}
+                      <div className="text-xs text-gray-800 w-full space-y-2">
+                        <div className="flex items-center gap-2">
+                          <FaPhoneAlt className="text-red-600 text-sm" />
+                          <span><b className="text-red-600">INSTANT</b> CALL BACK</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <FaCar className="text-red-600 text-sm" />
+                          <span><b className="text-red-600">FREE</b> SITE VISIT</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <FaRupeeSign className="text-red-600 text-sm" />
+                          <span><b className="text-red-600">UNMATCHED</b> PRICE</span>
+                        </div>
+                      </div>
+        
+                      {/* Form */}
+                      <form onSubmit={handleSubmit} className="w-full">
+                        <h2 className="text-lg font-bold text-red-600 mb-2 text-center"> ENQUIRY NOW</h2>
+                        
+                        {submitStatus === 'success' ? (
+                          <div className="text-center py-4">
+                            <p className="text-green-600 font-semibold">Thank you for your enquiry!</p>
+                            <p className="text-sm text-gray-600 mt-1">We'll contact you shortly.</p>
+                          </div>
+                        ) : (
+                          <>
+                            <input
+                              type="text"
+                              name="name"
+                              placeholder="Name"
+                              className="w-full border border-gray-300 rounded px-3 py-1 text-sm mb-2"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              required
+                            />
+                            <div className="flex items-center border border-gray-300 rounded px-3 py-1 text-sm mb-2">
+                              <span className="mr-2">🇮🇳 +91</span>
+                              <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Mobile Number"
+                                className="w-full outline-none text-sm"
+                                value={formData.phone}
+                                onChange={handleInputChange}
+                                required
+                              />
+                            </div>
+                            <label className="flex items-start text-[14px] text-gray-600 mb-2 gap-2">
+                              <input 
+                                type="checkbox" 
+                                name="consent"
+                                checked={formData.consent}
+                                onChange={handleInputChange}
+                                className="mt-1" 
+                              />
+                              <span>
+                                I Consent to data use per
+                                <a href="#" className="text-blue-600 ml-1">Privacy</a> &
+                                <a href="#" className="text-blue-600 ml-1">Terms</a>.
+                              </span>
+                            </label>
+                            {/* <div className="flex justify-center mb-3 mt-5">
+          <button 
+            type="submit"
+            disabled={isSubmitting}
+            className={`relative w-[80px] border border-black bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded-lg w-full
+                      transition-all duration-300 shadow-md
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      ${!isSubmitting ? 'animate-[subtlePop_2s_ease-in-out_infinite]' : ''}`}
+          >
+            {!isSubmitting && (
+              <span className="absolute inset-0 rounded-lg border-2 border-red-300 
+                              opacity-0
+                              animate-[pulseBorder_2s_ease-in-out_infinite] 
+                              pointer-events-none" />
+            )}
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+        </div> */}
+        
+        {/* heartbeat vala */}
+        <div className="flex justify-center mb-3 mt-5">
+          <button 
+            type="submit"
+            disabled={isSubmitting}
+            className={`relative max-w-[200px] border border-black bg-red-600 hover:bg-red-700 text-white text-lg font-semibold px-4 py-1.5 rounded-lg w-full
+                      transition-all duration-300 shadow-md
+                      disabled:opacity-50 disabled:cursor-not-allowed
+                      ${!isSubmitting ? 'animate-popBounce' : ''}`}
+          >
+            {!isSubmitting && (
+              <span className="absolute inset-0 rounded-lg  
+                              opacity-0
+                              animate-borderPulse 
+                              pointer-events-none" />
+            )}
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </button>
+        </div>
+                          </>
+                        )}
+        
+                        {submitStatus === 'error' && (
+                          <p className="text-red-500 text-xs text-center mb-2">
+                            Failed to submit. Please try again.
+                          </p>
+                        )}
+                      </form>
+        
+                      {/* Footer Info */}
+                      <div className="border border-red-600 rounded px-3 py-2 text-center w-full">
+                        <div className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-t mb-3 inline-block">
+                          GET INFORMATION
+                        </div>
+                        <div className="flex justify-around text-xs text-gray-800">
+                          <div className="flex items-center gap-1">🧱 Units</div>
+                          <div className="flex items-center gap-1">💳 Payment</div>
+                          <div className="flex items-center gap-1">📐 Plans</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    )}
 
 
-    <section className="flex flex-col md:flex-row items-center px-10 justify-between py-10 bg-white pt-80">
+{/* Property Info Card - Mobile */}
+    <div className="lg:hidden max-w-5xl flex justify-center">
+        <div className="relative w-full max-w-4xl sm:pt-10 lg:pt-30">
+          <div className="absolute sm:top-6 md:top-30 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="bg-red-600 text-white text-sm font-semibold py-1 px-4 rounded-t-xl rounded-b-sm shadow-md">
+              NEW LAUNCH
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 pt-6">
+            <div className="px-4 pb-4 text-center flex flex-col gap-4">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900">GOEL GANGA NEW TOWN</h2>
+                <p className="text-xl text-gray-900 font-semibold">At Dhanori, Pune</p>
+                <p className="text-lg text-gray-900 mb-2">By Goel Ganga Developments</p>
+
+                <div className="bg-gray-100 rounded-md px-3 py-2 text-xs text-center mb-2">
+                  <div className="flex justify-between"><span>Land Parcel</span><b>14 Acres</b></div>
+                  <div className="flex justify-between"><span>Storey</span><b>B1+ B2 +13</b></div>
+                  <div className="flex justify-between"><span>Possession</span><b>Dec 2027</b></div>
+                </div>
+
+                <ul className="text-[18px] text-white bg-red-500 mb-2 divide-y">
+                  <li className="py-1">Dhanori's Biggest Township</li>
+                  <li className="py-1">NO EMI Till Possession</li>
+                  <li className="py-1">Pay ₹1 Lacs*</li>
+                  <li className="py-1">10 Min to Airport</li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-lg font-semibold text-gray-900">2, 3 BHK & Penthouses Starts At</p>
+                <p className="text-2xl font-bold text-red-700 mb-2">
+                  ₹ 87.35 Lacs* <span className="text-xs text-red-500">All Incl.</span>
+                </p>
+
+                <button
+                  className="relative bg-red-500 text-white border border-black text-sm px-4 py-1.5 rounded-lg 
+                             transition-all duration-300 ease-in-out
+                             hover:scale-105 hover:shadow-lg
+                             active:scale-95 active:bg-red-600
+                             focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-opacity-50
+                             overflow-visible
+                             animate-popBounce w-full max-w-xs mx-auto"
+                  onClick={() => setShowhomeEnquiry(true)}
+                >
+                  <span className="absolute inset-0 rounded-lg 
+                                  opacity-0
+                                  animate-borderPulse 
+                                  pointer-events-none" />
+                  Enquire Now
+                </button>
+
+                <p className="text-[12px] text-gray-900 mt-1">RERA : P52100019275</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <section className="flex flex-col md:flex-row items-center px-10 justify-between py-10 bg-white md:pt-50 lg:pt-80">
       {/* Text Content */}
       <div className="md:w-1/3 space-y-4">
         <h2 className="text-red-600 text-xl font-bold mb-4">

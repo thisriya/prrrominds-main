@@ -5,6 +5,7 @@ import HeroImageSlider from './components/HeroImageSlider';
 import PropertyInfo from './components/PropertyInfo';
 import PropertyCard from './components/PropertyCard';
 import AboutGoelGanga from './components/AboutGoelGanga';
+import SiteVisitForm from './components/SiteVisitForm';
 function App() {
   return (
     <div>
@@ -18,11 +19,12 @@ function App() {
 
       {/* Property Info Card Positioned */}
       <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-20">
-        <PropertyInfo />
+        {/* <PropertyInfo /> */}
       </div>
     </div>
     <AboutGoelGanga/>
       <PropertyCard/>
+      <SiteVisitForm/>
     </div>
   );
 }

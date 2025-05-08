@@ -274,7 +274,7 @@ const PropertyCard = () => {
           )}
 
 
-<div className="px-4 py-6">
+<div className="px-4 sm:pt-50 relative py-6">
   <div className={`w-full ${isTablet ? 'mx-auto px-4' : 'md:w-3/4 pr-4 pl-4 md:pl-8 justify-center'}`}>
     <h3 className="text-3xl font-bold text-center text-red-600 mb-10">
       Goel Ganga New Town Dhanori - Area & Pricing
@@ -393,6 +393,7 @@ const PropertyCard = () => {
       </div>
     )}
   </div>
+
 </div>
 </>
   );
