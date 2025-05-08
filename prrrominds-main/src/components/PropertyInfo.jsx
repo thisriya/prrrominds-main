@@ -623,11 +623,11 @@ export default function PropertyInfo() {
                         <a href="#" className="text-blue-600 ml-1">Terms</a>.
                       </span>
                     </label>
-                    <div className="flex justify-center mb-3 mt-5">
+                    {/* <div className="flex justify-center mb-3 mt-5">
   <button 
     type="submit"
     disabled={isSubmitting}
-    className={`relative w-[85px] border border-black bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded-lg w-full
+    className={`relative w-[80px] border border-black bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded-lg w-full
               transition-all duration-300 shadow-md
               disabled:opacity-50 disabled:cursor-not-allowed
               ${!isSubmitting ? 'animate-[subtlePop_2s_ease-in-out_infinite]' : ''}`}
@@ -636,6 +636,26 @@ export default function PropertyInfo() {
       <span className="absolute inset-0 rounded-lg border-2 border-red-300 
                       opacity-0
                       animate-[pulseBorder_2s_ease-in-out_infinite] 
+                      pointer-events-none" />
+    )}
+    {isSubmitting ? 'Submitting...' : 'Submit'}
+  </button>
+</div> */}
+
+{/* heartbeat vala */}
+<div className="flex justify-center mb-3 mt-5">
+  <button 
+    type="submit"
+    disabled={isSubmitting}
+    className={`relative max-w-[130px] border border-black bg-red-600 hover:bg-red-700 text-white text-lg font-semibold px-4 py-1.5 rounded-lg w-full
+              transition-all duration-300 shadow-md
+              disabled:opacity-50 disabled:cursor-not-allowed
+              ${!isSubmitting ? 'animate-popBounce' : ''}`}
+  >
+    {!isSubmitting && (
+      <span className="absolute inset-0 rounded-lg  
+                      opacity-0
+                      animate-borderPulse 
                       pointer-events-none" />
     )}
     {isSubmitting ? 'Submitting...' : 'Submit'}
@@ -704,7 +724,7 @@ export default function PropertyInfo() {
                   ₹ 87.35 Lacs* <span className="text-xs text-red-500">All Incl.</span>
                 </p>
 
-                <button
+                {/* <button
   className="relative bg-red-500 text-white text-sm px-4 py-1.5 rounded-lg 
              border border-transparent
              transition-all duration-300 ease-in-out
@@ -720,7 +740,26 @@ export default function PropertyInfo() {
                   animate-[pulseBorder_2s_cubic-bezier(0.4,0,0.6,1)_infinite] 
                   pointer-events-none" />
   Enquire Now
+</button> */}
+
+{/* heartbeat vala */}
+<button
+  className="relative bg-red-500 text-white border border-black text-sm px-4 py-1.5 rounded-lg 
+             transition-all duration-300 ease-in-out
+             hover:scale-105 hover:shadow-lg
+             active:scale-95 active:bg-red-600
+             focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-opacity-50
+             overflow-visible
+             animate-popBounce"
+  onClick={() => setShowEnquiry(true)}
+>
+  <span className="absolute inset-0 rounded-lg 
+                  opacity-0
+                  animate-borderPulse 
+                  pointer-events-none" />
+  Enquire Now
 </button>
+
                 <p className="text-[12px] text-gray-900 mt-1">RERA : P52100019275</p>
               </div>
             </div>

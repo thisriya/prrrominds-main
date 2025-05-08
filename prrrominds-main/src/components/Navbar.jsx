@@ -472,7 +472,7 @@ const Sidebar = () => {
           </div>
 
           {/* Request Call Back Button */}
-          <div className="flex justify-center mb-4">
+          {/* <div className="flex justify-center mb-4">
   <button 
     onClick={() => setShowEnquiry(true)}
     className="relative bg-red-600 text-white border border-black py-2 px-6 font-semibold rounded-lg 
@@ -482,6 +482,22 @@ const Sidebar = () => {
     <span className="absolute inset-0 rounded-lg border-2 border-red-300 
                     opacity-0
                     animate-[pulseBorder_2s_ease-in-out_infinite] 
+                    pointer-events-none" />
+    Request Call Back
+  </button>
+</div> */}
+
+{/* heartbeat request call back */}
+<div className="flex justify-center mb-4">
+  <button 
+    onClick={() => setShowEnquiry(true)}
+    className="relative bg-red-600 text-white border border-black py-2 px-6 font-semibold rounded-lg 
+             hover:bg-red-700 transition-all duration-300 shadow-md
+             animate-popBounce"
+  >
+    <span className="absolute inset-0 rounded-lg  
+                    opacity-0
+                    animate-borderPulse 
                     pointer-events-none" />
     Request Call Back
   </button>
@@ -554,7 +570,7 @@ const Sidebar = () => {
                   <a href="#" className="text-blue-600 underline hover:text-blue-800">Terms & Conditions</a>.
                 </label>
               </div>
-              <div className="flex justify-center">
+              {/* <div className="flex justify-center">
   <button 
     type="submit"
     disabled={isSubmitting}
@@ -567,6 +583,26 @@ const Sidebar = () => {
       <span className="absolute inset-0 rounded-lg border-2 border-red-300 
                       opacity-0
                       animate-[pulseBorder_2s_ease-in-out_infinite] 
+                      pointer-events-none" />
+    )}
+    {isSubmitting ? 'Submitting...' : 'Submit'}
+  </button>
+</div> */}
+
+{/* heartbeat vala */}
+<div className="flex justify-center mb-3 mt-5">
+  <button 
+    type="submit"
+    disabled={isSubmitting}
+    className={`relative max-w-[130px] border border-black bg-red-600 hover:bg-red-700 text-white text-lg font-semibold px-4 py-1.5 rounded-lg w-full
+              transition-all duration-300 shadow-md
+              disabled:opacity-50 disabled:cursor-not-allowed
+              ${!isSubmitting ? 'animate-popBounce' : ''}`}
+  >
+    {!isSubmitting && (
+      <span className="absolute inset-0 rounded-lg  
+                      opacity-0
+                      animate-borderPulse 
                       pointer-events-none" />
     )}
     {isSubmitting ? 'Submitting...' : 'Submit'}

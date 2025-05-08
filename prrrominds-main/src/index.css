@@ -46,3 +46,98 @@
       transform: scale(1.01);
     }
   }
+
+
+
+
+
+
+
+
+
+
+  /* hearbeat */
+  @keyframes popBounce {
+    0%, 100% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(0.95); /* Small squash */
+    }
+    40% {
+      transform: scale(1.15); /* Big stretch */
+    }
+    60% {
+      transform: scale(0.98); /* Small rebound */
+    }
+    80% {
+      transform: scale(1.05); /* Final little bounce */
+    }
+  }
+  
+  @keyframes borderPulse {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    40% {
+      opacity: 0.8;
+      transform: scale(1.1);
+    }
+    80% {
+      opacity: 0.4;
+      transform: scale(1.05);
+    }
+  }
+  
+  .animate-popBounce {
+    animation: popBounce 1.2s ease-in-out infinite;
+  }
+  
+  .animate-borderPulse {
+    animation: borderPulse 1.2s ease-in-out infinite;
+  }
+
+
+
+
+  @keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+      }
+      20% {
+        transform: scale(0.95); /* Small squash */
+      }
+      40% {
+        transform: scale(1.15); /* Big stretch */
+      }
+      60% {
+        transform: scale(0.98); /* Small rebound */
+      }
+      80% {
+        transform: scale(1.05); /* Final little bounce */
+      }
+  }
+  
+  @keyframes pulseBorder {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+      40% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+      80% {
+        opacity: 0.4;
+        transform: scale(1.05);
+      }
+  }
+  
+  .animate-heartbeat {
+    animation: heartbeat 1.2s ease-in-out infinite;
+  }
+  
+  .animate-pulseBorder {
+    animation: pulseBorder 1.2s ease-in-out infinite;
+  }
