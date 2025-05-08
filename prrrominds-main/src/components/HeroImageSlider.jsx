@@ -28,7 +28,8 @@ const ImageCarousel = ({ interval = 3500 }) => {
   };
 
   return (
-    // Added mb-8 (or your preferred spacing) to prevent overlap
+    <>
+    {/* Added mb-8 (or your preferred spacing) to prevent overlap */}
     <div className="relative w-full h-[500px] sm:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden mb-8">
       {/* Slider track */}
       <div
@@ -77,6 +78,8 @@ const ImageCarousel = ({ interval = 3500 }) => {
         &#8594;
       </button>
     </div>
+
+    </>
   );
 };
 

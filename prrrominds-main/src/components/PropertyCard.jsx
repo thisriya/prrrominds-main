@@ -281,7 +281,7 @@ const PropertyCard = () => {
     </h3>
     
     {/* Cards Container */}
-    <div className="relative  ">
+    <div className="relative">
       <div
         className="grid grid-cols-1 gap-4 md:gap-2 w-full justify-center md:justify-start max-w-7xl mx-auto relative lg:pl-4 lg:pr-4"
         style={{
