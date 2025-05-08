@@ -39,7 +39,186 @@ const useScreenSize = () => {
   return screenSize;
 };
 
+// const Sidebar = () => {
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     phone: '',
+//     consent: false
+//   });
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   const [submitSuccess, setSubmitSuccess] = useState(false);
+//   const [submitError, setSubmitError] = useState('');
+
+//   const handleChange = (e) => {
+//     const { name, value, type, checked } = e.target;
+//     setFormData(prev => ({
+//       ...prev,
+//       [name]: type === 'checkbox' ? checked : value
+//     }));
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+//     setSubmitError('');
+    
+//     try {
+//       const response = await fetch('https://api.web3forms.com/submit', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           access_key: '4e9faa02-cb51-4253-98e6-b5794f4ece3a', // Replace with your actual access key
+//           name: formData.name,
+//           phone: formData.phone,
+//           consent: formData.consent ? 'Yes' : 'No',
+//           subject: 'New Enquiry from Website',
+//           from_name: 'Website Sidebar Form',
+//           redirect: false
+//         }),
+//       });
+
+//       const result = await response.json();
+      
+//       if (result.success) {
+//         setSubmitSuccess(true);
+//         setFormData({
+//           name: '',
+//           phone: '',
+//           consent: false
+//         });
+//         // Reset success message after 5 seconds
+//         setTimeout(() => setSubmitSuccess(false), 5000);
+//       } else {
+//         throw new Error(result.message || 'Failed to submit form');
+//       }
+//     } catch (error) {
+//       setSubmitError(error.message || 'Something went wrong. Please try again.');
+//     } finally {
+//       setIsSubmitting(false);
+//     }
+//   };
+
+//   const handleCallBackRequest = () => {
+//     window.location.href = 'tel:+919606970803';
+//   };
+
+//   return (
+//     <aside className="hidden lg:block w-72 bg-white shadow-xl border-l border-gray-200 fixed right-0 top-0 h-screen overflow-y-auto z-50">
+//       <div className="p-4">
+//         {/* Organize Site Visit Header */}
+//         <div className="flex justify-between bg-red-600 divide-x items-center mb-4">
+//           <span className="bg-red-600 text-white px-3 py-1 text-xs rounded">Organize Site Visit</span>
+//           <a 
+//             href="tel:+919606970803" 
+//             className="bg-red-600 text-white px-3 py-1 text-xs rounded font-semibold hover:bg-red-700 transition"
+//           >
+//             +91 9606970803
+//           </a>
+//         </div>
+
+//         {/* Request Call Back Button */}
+//         <button 
+//           onClick={handleCallBackRequest}
+//           className="w-full bg-red-600 text-white py-2 font-semibold rounded mb-4 hover:bg-red-700 transition shadow-md"
+//         >
+//           Request Call Back
+//         </button>
+
+//         {/* ENQUIRE NOW Form */}
+//         <div className="mb-6">
+//           <div className="flex items-center justify-center mb-3">
+//             <h3 className="text-lg font-semibold text-center">ENQUIRE NOW</h3>
+//             <a 
+//               href="https://wa.me/919606970803" 
+//               target="_blank" 
+//               rel="noopener noreferrer" 
+//               className="ml-2"
+//             >
+//               <img src="/what1.webp" alt="WhatsApp" className="w-6 h-6" />
+//             </a>
+//           </div>
+          
+//           {submitSuccess && (
+//             <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
+//               Thank you! Your enquiry has been submitted successfully.
+//             </div>
+//           )}
+          
+//           {submitError && (
+//             <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+//               {submitError}
+//             </div>
+//           )}
+
+//           <form onSubmit={handleSubmit} className="space-y-3">
+//             <input 
+//               type="text" 
+//               name="name"
+//               placeholder="Name" 
+//               value={formData.name}
+//               onChange={handleChange}
+//               required
+//               className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500" 
+//             />
+//             <div className="flex border border-gray-300 rounded overflow-hidden focus-within:ring-2 focus-within:ring-red-500">
+//               <span className="bg-gray-100 px-3 py-2 flex items-center">+91</span>
+//               <input 
+//                 type="tel" 
+//                 name="phone"
+//                 placeholder="Mobile Number" 
+//                 value={formData.phone}
+//                 onChange={handleChange}
+//                 required
+//                 pattern="[0-9]{10}"
+//                 className="w-full px-2 py-2 focus:outline-none" 
+//               />
+//             </div>
+//             <div className="flex items-start">
+//               <input 
+//                 type="checkbox" 
+//                 id="consent"
+//                 name="consent"
+//                 checked={formData.consent}
+//                 onChange={handleChange}
+//                 required
+//                 className="mt-1 mr-2"
+//               />
+//               <label htmlFor="consent" className="text-xs text-gray-600">
+//                 I Consent to The Processing of Provided Data According To{' '}
+//                 <a href="#" className="text-blue-600 underline hover:text-blue-800">Privacy Policy</a>,{' '}
+//                 <a href="#" className="text-blue-600 underline hover:text-blue-800">Terms & Conditions</a>.
+//               </label>
+//             </div>
+//             <button 
+//               type="submit" 
+//               disabled={isSubmitting}
+//               className="w-full bg-red-600 text-white py-2 font-semibold rounded hover:bg-red-700 transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+//             >
+//               {isSubmitting ? 'Submitting...' : 'Submit'}
+//             </button>
+//           </form>
+//         </div>
+
+//         {/* WhatsApp Image Section */}
+//         <div className="mt-4">
+//           <img
+//             src="/place1.webp"
+//             alt="Pickup Service"
+//             className="w-full h-auto object-contain rounded"
+//           />
+//         </div>
+//       </div>
+//     </aside>
+//   );
+// };
+
+
+
+
 const Sidebar = () => {
+  const [showEnquiry, setShowEnquiry] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -48,6 +227,14 @@ const Sidebar = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [submitStatus, setSubmitStatus] = useState(null); // For modal form
+
+  useEffect(() => {
+    document.body.style.overflow = showEnquiry ? 'hidden' : 'auto';
+    if (!showEnquiry) {
+      setSubmitStatus(null);
+    }
+  }, [showEnquiry]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -69,7 +256,7 @@ const Sidebar = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          access_key: '4e9faa02-cb51-4253-98e6-b5794f4ece3a', // Replace with your actual access key
+          access_key: '4e9faa02-cb51-4253-98e6-b5794f4ece3a',
           name: formData.name,
           phone: formData.phone,
           consent: formData.consent ? 'Yes' : 'No',
@@ -88,7 +275,6 @@ const Sidebar = () => {
           phone: '',
           consent: false
         });
-        // Reset success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000);
       } else {
         throw new Error(result.message || 'Failed to submit form');
@@ -100,117 +286,295 @@ const Sidebar = () => {
     }
   };
 
-  const handleCallBackRequest = () => {
-    window.location.href = 'tel:+919606970803';
+  const handleModalSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "4e9faa02-cb51-4253-98e6-b5794f4ece3a",
+          name: formData.name,
+          phone: formData.phone,
+          subject: "Enquiry for Goel Ganga New Town",
+          from_name: "Property Website",
+          consent: formData.consent ? "Yes" : "No"
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          phone: '',
+          consent: true
+        });
+        setTimeout(() => {
+          setShowEnquiry(false);
+        }, 3000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCallBackRequest = (e) => {
+    e.preventDefault();
+    setShowEnquiry(true);
   };
 
   return (
-    <aside className="hidden lg:block w-72 bg-white shadow-xl border-l border-gray-200 fixed right-0 top-0 h-screen overflow-y-auto z-50">
-      <div className="p-4">
-        {/* Organize Site Visit Header */}
-        <div className="flex justify-between bg-red-600 divide-x items-center mb-4">
-          <span className="bg-red-600 text-white px-3 py-1 text-xs rounded">Organize Site Visit</span>
-          <a 
-            href="tel:+919606970803" 
-            className="bg-red-600 text-white px-3 py-1 text-xs rounded font-semibold hover:bg-red-700 transition"
-          >
-            +91 9606970803
-          </a>
-        </div>
-
-        {/* Request Call Back Button */}
-        <button 
-          onClick={handleCallBackRequest}
-          className="w-full bg-red-600 text-white py-2 font-semibold rounded mb-4 hover:bg-red-700 transition shadow-md"
-        >
-          Request Call Back
-        </button>
-
-        {/* ENQUIRE NOW Form */}
-        <div className="mb-6">
-          <div className="flex items-center justify-center mb-3">
-            <h3 className="text-lg font-semibold text-center">ENQUIRE NOW</h3>
-            <a 
-              href="https://wa.me/919606970803" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="ml-2"
+    <>
+      {/* Enquiry Modal */}
+      {showEnquiry && (
+        <div className="fixed left-0 top-0 w-screen h-screen z-30 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-xl w-full max-w-sm mx-2 p-5 relative">
+            <button
+              className="absolute top-2 right-3 text-gray-600 text-xl"
+              onClick={() => setShowEnquiry(false)}
             >
-              <img src="/what1.webp" alt="WhatsApp" className="w-6 h-6" />
+              ×
+            </button>
+
+            <div className="flex flex-col items-center gap-4">
+              {/* Header */}
+              <div className="bg-red-600 text-white text-sm py-1 px-3 rounded font-semibold">
+                WE PROMISE
+              </div>
+
+              {/* Promise Info */}
+              <div className="text-xs text-gray-800 w-full space-y-2">
+                <div className="flex items-center gap-2">
+                  <FaPhoneAlt className="text-red-600 text-sm" />
+                  <span><b className="text-red-600">INSTANT</b> CALL BACK</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCar className="text-red-600 text-sm" />
+                  <span><b className="text-red-600">FREE</b> SITE VISIT</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaRupeeSign className="text-red-600 text-sm" />
+                  <span><b className="text-red-600">UNMATCHED</b> PRICE</span>
+                </div>
+              </div>
+
+              {/* Form */}
+              <form onSubmit={handleModalSubmit} className="w-full">
+                <h2 className="text-lg font-bold text-red-600 mb-2 text-center">ENQUIRY NOW</h2>
+                
+                {submitStatus === 'success' ? (
+                  <div className="text-center py-4">
+                    <p className="text-green-600 font-semibold">Thank you for your enquiry!</p>
+                    <p className="text-sm text-gray-600 mt-1">We'll contact you shortly.</p>
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      className="w-full border border-gray-300 rounded px-3 py-1 text-sm mb-2"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                    <div className="flex items-center border border-gray-300 rounded px-3 py-1 text-sm mb-2">
+                      <span className="mr-2">🇮🇳 +91</span>
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Mobile Number"
+                        className="w-full outline-none text-sm"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <label className="flex items-start text-[10px] text-gray-600 mb-2 gap-2">
+                      <input 
+                        type="checkbox" 
+                        name="consent"
+                        checked={formData.consent}
+                        onChange={handleChange}
+                        className="mt-1" 
+                      />
+                      <span>
+                        I Consent to data use per
+                        <a href="#" className="text-blue-600 ml-1">Privacy</a> &
+                        <a href="#" className="text-blue-600 ml-1">Terms</a>.
+                      </span>
+                    </label>
+                    <button 
+                      type="submit"
+                      className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded-full w-full mb-3 disabled:opacity-50"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit'}
+                    </button>
+                  </>
+                )}
+
+                {submitStatus === 'error' && (
+                  <p className="text-red-500 text-xs text-center mb-2">
+                    Failed to submit. Please try again.
+                  </p>
+                )}
+              </form>
+
+              {/* Footer Info */}
+              <div className="border border-red-600 rounded px-3 py-2 text-center w-full">
+                <div className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-t mb-3 inline-block">
+                  GET INFORMATION
+                </div>
+                <div className="flex justify-around text-xs text-gray-800">
+                  <div className="flex items-center gap-1">🧱 Units</div>
+                  <div className="flex items-center gap-1">💳 Payment</div>
+                  <div className="flex items-center gap-1">📐 Plans</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <aside className="hidden lg:block w-72 bg-white shadow-xl border-l border-gray-200 fixed right-0 top-0 h-screen overflow-y-auto z-50">
+        <div className="p-4">
+          {/* Organize Site Visit Header */}
+          <div className="flex justify-between bg-red-600 divide-x items-center mb-4">
+            <span className="bg-red-600 text-white px-3 py-1 text-xs rounded">Organize Site Visit</span>
+            <a 
+              href="tel:+919606970803" 
+              className="bg-red-600 text-white px-3 py-1 text-xs rounded font-semibold hover:bg-red-700 transition"
+            >
+              +91 9606970803
             </a>
           </div>
-          
-          {submitSuccess && (
-            <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
-              Thank you! Your enquiry has been submitted successfully.
-            </div>
-          )}
-          
-          {submitError && (
-            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-              {submitError}
-            </div>
-          )}
 
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <input 
-              type="text" 
-              name="name"
-              placeholder="Name" 
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500" 
+          {/* Request Call Back Button */}
+          <div className="flex justify-center mb-4">
+  <button 
+    onClick={() => setShowEnquiry(true)}
+    className="relative bg-red-600 text-white border border-black py-2 px-6 font-semibold rounded-lg 
+             hover:bg-red-700 transition-all duration-300 shadow-md
+             animate-[pop_2s_ease-in-out_infinite]"
+  >
+    <span className="absolute inset-0 rounded-lg border-2 border-red-300 
+                    opacity-0
+                    animate-[pulseBorder_2s_ease-in-out_infinite] 
+                    pointer-events-none" />
+    Request Call Back
+  </button>
+</div>
+
+          
+
+          {/* ENQUIRE NOW Form */}
+          <div className="mb-6">
+            <div className="flex items-center justify-center mb-3">
+              <h3 className="text-lg font-semibold text-center">ENQUIRE NOW</h3>
+              <a 
+                href="https://wa.me/919606970803" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="ml-2"
+              >
+                <img src="/what1.webp" alt="WhatsApp" className="w-6 h-6" />
+              </a>
+            </div>
+            
+            {submitSuccess && (
+              <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
+                Thank you! Your enquiry has been submitted successfully.
+              </div>
+            )}
+            
+            {submitError && (
+              <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                {submitError}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-3">
+              <input 
+                type="text" 
+                name="name"
+                placeholder="Name" 
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500" 
+              />
+              <div className="flex border border-gray-300 rounded overflow-hidden focus-within:ring-2 focus-within:ring-red-500">
+                <span className="bg-gray-100 px-3 py-2 flex items-center">+91</span>
+                <input 
+                  type="tel" 
+                  name="phone"
+                  placeholder="Mobile Number" 
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  pattern="[0-9]{10}"
+                  className="w-full px-2 py-2 focus:outline-none" 
+                />
+              </div>
+              <div className="flex items-start">
+                <input 
+                  type="checkbox" 
+                  id="consent"
+                  name="consent"
+                  checked={formData.consent}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 mr-2"
+                />
+                <label htmlFor="consent" className="text-xs text-gray-600">
+                  I Consent to The Processing of Provided Data According To{' '}
+                  <a href="#" className="text-blue-600 underline hover:text-blue-800">Privacy Policy</a>,{' '}
+                  <a href="#" className="text-blue-600 underline hover:text-blue-800">Terms & Conditions</a>.
+                </label>
+              </div>
+              <div className="flex justify-center">
+  <button 
+    type="submit"
+    disabled={isSubmitting}
+    className={`relative w-[100px] border border-black  bg-red-600 text-white py-2 px-6 font-semibold rounded-lg 
+              hover:bg-red-700 transition-all duration-300 shadow-md
+              disabled:opacity-70 disabled:cursor-not-allowed
+              ${!isSubmitting ? 'animate-[subtlePop_2s_ease-in-out_infinite]' : ''}`}
+  >
+    {!isSubmitting && (
+      <span className="absolute inset-0 rounded-lg border-2 border-red-300 
+                      opacity-0
+                      animate-[pulseBorder_2s_ease-in-out_infinite] 
+                      pointer-events-none" />
+    )}
+    {isSubmitting ? 'Submitting...' : 'Submit'}
+  </button>
+</div>
+            </form>
+          </div>
+
+          {/* WhatsApp Image Section */}
+          <div className="mt-4">
+            <img
+              src="/place1.webp"
+              alt="Pickup Service"
+              className="w-full h-auto object-contain rounded"
             />
-            <div className="flex border border-gray-300 rounded overflow-hidden focus-within:ring-2 focus-within:ring-red-500">
-              <span className="bg-gray-100 px-3 py-2 flex items-center">+91</span>
-              <input 
-                type="tel" 
-                name="phone"
-                placeholder="Mobile Number" 
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                pattern="[0-9]{10}"
-                className="w-full px-2 py-2 focus:outline-none" 
-              />
-            </div>
-            <div className="flex items-start">
-              <input 
-                type="checkbox" 
-                id="consent"
-                name="consent"
-                checked={formData.consent}
-                onChange={handleChange}
-                required
-                className="mt-1 mr-2"
-              />
-              <label htmlFor="consent" className="text-xs text-gray-600">
-                I Consent to The Processing of Provided Data According To{' '}
-                <a href="#" className="text-blue-600 underline hover:text-blue-800">Privacy Policy</a>,{' '}
-                <a href="#" className="text-blue-600 underline hover:text-blue-800">Terms & Conditions</a>.
-              </label>
-            </div>
-            <button 
-              type="submit" 
-              disabled={isSubmitting}
-              className="w-full bg-red-600 text-white py-2 font-semibold rounded hover:bg-red-700 transition shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </button>
-          </form>
+          </div>
         </div>
-
-        {/* WhatsApp Image Section */}
-        <div className="mt-4">
-          <img
-            src="/place1.webp"
-            alt="Pickup Service"
-            className="w-full h-auto object-contain rounded"
-          />
-        </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 

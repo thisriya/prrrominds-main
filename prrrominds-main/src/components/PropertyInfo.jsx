@@ -694,20 +694,22 @@ export default function PropertyInfo() {
                 </p>
 
                 <button
-                  className="relative bg-red-500 text-white text-sm px-4 py-1.5 rounded-lg 
-                           border border-transparent
-                           transition-all duration-300 ease-in-out
-                           hover:scale-105 hover:shadow-lg
-                           active:scale-95 active:bg-red-600
-                           focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-opacity-50
-                           overflow-visible"
-                  onClick={() => setShowEnquiry(true)}
-                >
-                  <span className="absolute inset-0 rounded-lg border-2 border-black 
-                                  animate-[pulse_1.5s_cubic-bezier(0.4,0,0.6,1)_infinite] 
-                                  pointer-events-none" />
-                  Enquire Now
-                </button>
+  className="relative bg-red-500 text-white text-sm px-4 py-1.5 rounded-lg 
+             border border-transparent
+             transition-all duration-300 ease-in-out
+             hover:scale-105 hover:shadow-lg
+             active:scale-95 active:bg-red-600
+             focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-opacity-50
+             overflow-visible
+             animate-[pop_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+  onClick={() => setShowEnquiry(true)}
+>
+  <span className="absolute inset-0 rounded-lg border-2 border-black 
+                  opacity-0
+                  animate-[pulseBorder_2s_cubic-bezier(0.4,0,0.6,1)_infinite] 
+                  pointer-events-none" />
+  Enquire Now
+</button>
                 <p className="text-[12px] text-gray-900 mt-1">RERA : P52100019275</p>
               </div>
             </div>
