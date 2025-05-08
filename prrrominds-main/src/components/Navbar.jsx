@@ -414,13 +414,24 @@ const Sidebar = () => {
                         <a href="#" className="text-blue-600 ml-1">Terms</a>.
                       </span>
                     </label>
-                    <button 
-                      type="submit"
-                      className="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded-full w-full mb-3 disabled:opacity-50"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? 'Submitting...' : 'Submit'}
-                    </button>
+                   <div className="flex justify-center mb-3">
+  <button 
+    type="submit"
+    disabled={isSubmitting}
+    className={`relative bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-1.5 rounded-full w-full
+              transition-all duration-300 shadow-md
+              disabled:opacity-50 disabled:cursor-not-allowed
+              ${!isSubmitting ? 'animate-[subtlePop_2s_ease-in-out_infinite]' : ''}`}
+  >
+    {!isSubmitting && (
+      <span className="absolute inset-0 rounded-full border-2 border-red-300 
+                      opacity-0
+                      animate-[pulseBorder_2s_ease-in-out_infinite] 
+                      pointer-events-none" />
+    )}
+    {isSubmitting ? 'Submitting...' : 'Submit'}
+  </button>
+</div>
                   </>
                 )}
 
